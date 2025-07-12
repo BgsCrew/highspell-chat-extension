@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Highspell Chat Settings</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #222;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            width: 250px;
+        }
+
+        .setting {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #444;
+            border-radius: 22px;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 2px;
+            bottom: 2px;
+            background: #fff;
+            border-radius: 50%;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background: #4caf50;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(18px);
+        }
+
+        #openSettings,
+        #openSettings {
+            width: 100%;
+            padding: 8px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Highspell Chat Settings</h3>
+    <div class="setting">
+        <span>Enable timestamps</span>
+        <label class="switch">
+            <input type="checkbox" id="timestampActive">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="setting">
+        <span>Disable local chat</span>
+        <label class="switch">
+            <input type="checkbox" id="hideLocalMessage">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="setting">
+        <span>Disable global chat</span>
+        <label class="switch">
+            <input type="checkbox" id="hideGlobalChat">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="setting">
+        <span>Disable private chat</span>
+        <label class="switch">
+            <input type="checkbox" id="hidePrivateMessage">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="setting">
+        <span>Disable level messages</span>
+        <label class="switch">
+            <input type="checkbox" id="hideLevelMessage">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="setting">
+        <span>Disable death messages</span>
+        <label class="switch">
+            <input type="checkbox" id="hideDeathMessage">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="setting">
+        <span>Disable game messages</span>
+        <label class="switch">
+            <input type="checkbox" id="hideGameMessage">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+
+    <div class="setting">
+        <button id="openSettings">Custom Chat Colour Settings</button>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

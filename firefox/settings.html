@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Highspell Chat Settings</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #222;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #292929;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      padding: 32px 24px;
+      width: 340px;
+      max-width: 90vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h2 {
+      margin-bottom: 24px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .setting {
+      margin-bottom: 18px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .label {
+      font-size: 1.05em;
+      font-weight: 500;
+      text-align: left;
+      min-width: 120px;
+    }
+    input[type="color"] {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #4caf50;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Chat Colour Settings</h2>
+    <div class="setting">
+      <span class="label">Local Message</span>
+      <input type="checkbox" id="localMessageColourEnabled">
+      <input type="color" id="localMessageColour">
+    </div>
+    <div class="setting">
+      <span class="label">Global Chat</span>
+      <input type="checkbox" id="globalChatColourEnabled">
+      <input type="color" id="globalChatColour">
+    </div>
+    <div class="setting">
+      <span class="label">Private Message</span>
+      <input type="checkbox" id="privateMessageColourEnabled">
+      <input type="color" id="privateMessageColour">
+    </div>
+    <div class="setting">
+      <span class="label">Level Message</span>
+      <input type="checkbox" id="levelMessageColourEnabled">
+      <input type="color" id="levelMessageColour">
+    </div>
+    <div class="setting">
+      <span class="label">Death Message</span>
+      <input type="checkbox" id="deathMessageColourEnabled">
+      <input type="color" id="deathMessageColour">
+    </div>
+    <div class="setting">
+      <span class="label">Game Message</span>
+      <input type="checkbox" id="gameMessageColourEnabled">
+      <input type="color" id="gameMessageColour">
+    </div>
+  </div>
+  <script src="settings.js"></script>
+</body>
+</html>

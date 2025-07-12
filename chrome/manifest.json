@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Highspell Chat Extension",
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "version": "1.0",
+  "description": "Customise your chat settings, such as hidden chats or chat colours, for Highspell.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://highspell.com/game"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Highspell Chat Extension"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://highspell.com/game"],
+      "js": ["jquery-3.7.1.slim.min.js", "content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  }
+}
