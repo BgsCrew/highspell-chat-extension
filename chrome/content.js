@@ -113,7 +113,7 @@ $(document).ready(function () {
                       modal.innerHTML = `
                         <div class="hs-menu hs-closeable-menu hs-center-menu hs-center-menu--horizontally-centered hs-center-menu--vertically-centered"
                             id="hs-skill-guide-menu">
-                            <div class="hs-menu-header"><span class="hs-menu-header__title">Report a player</span><button
+                            <div class="hs-menu-header"><span class="hs-menu-header__title">Message Options</span><button
                                     class="hs-button hs-close-button hs-menu-header__close-button hs-image-button" tabindex="-1" id="close-chat-modal">
                                     <div class="hs-button__content-container hs-scaleable-content-on-click hs-image-button__content-container">
                                         <div class="hs-image-button__image hs-icon-background hs-close-button__x hs-close-button__x--white">
@@ -125,22 +125,14 @@ $(document).ready(function () {
                                 <div style="margin-bottom:1rem;">Username: ${chatMessageData.username}</div>
                                 <div style="margin-bottom:1rem;">Message: ${chatMessageData.message}</div>
                                 <div style="margin-bottom:1rem;">Timestamp: ${new Date(chatMessageData.timestamp).toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })}</div>
-                                <div style="text-align:center; width:100%; margin-top:2rem;">Report for:</div>
-                                <div style="display:flex; justify-content:center;">
-                                  <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:0.75rem;">
-                                    <button class="report-reason-btn" data-reason="Offensive Player" style="border-radius:10px; padding:0.75rem 1rem; cursor:pointer; background:#ffc107; color:#fff; font-weight:bold; border:none;">Offensive Player</button>
-                                    <button class="report-reason-btn" data-reason="Harassment" style="border-radius:10px; padding:0.75rem 1rem; cursor:pointer; background:#fd7e14; color:#fff; font-weight:bold; border:none;">Harassment</button>
-                                    <button class="report-reason-btn" data-reason="Botting" style="border-radius:10px; padding:0.75rem 1rem; cursor:pointer; background:#dc3545; color:#fff; font-weight:bold; border:none;">Botting</button>
-                                    <button class="report-reason-btn" data-reason="Duping" style="border-radius:10px; padding:0.75rem 1rem; cursor:pointer; background:#b71c1c; color:#fff; font-weight:bold; border:none;">Duping</button>
-                                  </div>
-                                </div>
+
                               </div>
                             </div>
                         </div>
                       `;
                       screenMask.appendChild(modal);
 
-                      // Add report button click handler to send to Discord
+                      // Add report button click handler to send to Discord - future development
                       var reportBtns = modal.querySelectorAll('.report-reason-btn');
                       reportBtns.forEach(function(btn) {
                         btn.addEventListener('click', function(e) {

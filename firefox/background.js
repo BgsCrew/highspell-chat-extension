@@ -11,7 +11,9 @@ chrome.action.onClicked.addListener((tab) => {
 });
 
 // Discord webhook integration
-const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1393598241836109965/FVz3bKqbJAxs8L5QCoRBpSCHITbO6BXnARsuCxf3Q-skbgiTnDza4bFAy2X23Xue2Rfz";
+// TODO: REWRITE TO POST TO API ENDPOINT TO HANDLE PARSING AND RATE LIMITING
+// This code should not currently be reachable as the buttons to call it are in another branch. Will throw an error if called due to no defined webhook url.
+const DISCORD_WEBHOOK_URL = "";
 
 if (typeof chrome !== 'undefined' && chrome.runtime) {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
