@@ -125,7 +125,15 @@ $(document).ready(function () {
                                 <div style="margin-bottom:1rem;">Username: ${chatMessageData.username}</div>
                                 <div style="margin-bottom:1rem;">Message: ${chatMessageData.message}</div>
                                 <div style="margin-bottom:1rem;">Timestamp: ${new Date(chatMessageData.timestamp).toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })}</div>
-
+                                <div style="text-align:center; width:100%; margin-top:2rem;">Report for:</div>
+                                <div style="display:flex; justify-content:center;">
+                                  <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:0.75rem;">
+                                    <button class="report-reason-btn" data-reason="Offensive Player" style="border-radius:10px; padding:0.75rem 1rem; cursor:pointer; background:#ffc107; color:#fff; font-weight:bold; border:none;">Offensive Player</button>
+                                    <button class="report-reason-btn" data-reason="Harassment" style="border-radius:10px; padding:0.75rem 1rem; cursor:pointer; background:#fd7e14; color:#fff; font-weight:bold; border:none;">Harassment</button>
+                                    <button class="report-reason-btn" data-reason="Botting" style="border-radius:10px; padding:0.75rem 1rem; cursor:pointer; background:#dc3545; color:#fff; font-weight:bold; border:none;">Botting</button>
+                                    <button class="report-reason-btn" data-reason="Duping" style="border-radius:10px; padding:0.75rem 1rem; cursor:pointer; background:#b71c1c; color:#fff; font-weight:bold; border:none;">Duping</button>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                         </div>
