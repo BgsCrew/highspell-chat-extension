@@ -1,9 +1,17 @@
 // Developed by Zora! <3
+
+// Item replacement functionality
+let highspellItems = null;
+
 $(document).ready(function () {
   console.log(
     "Highspell Chat Extension loaded, developed by Zora with a lot of vibecoding. Have fun!"
   );
   // Extension loaded log (optional for debugging, can be removed for production)
+
+  // Load highspell items on startup
+  console.log("Starting to load highspell items...");
+  loadHighspellItems();
 
   // Prevent default actions for clicks on the chat menu section, for use in not have the character move when clicking a <button>
   function preventDefault(e) {
@@ -85,6 +93,20 @@ $(document).ready(function () {
                       }
                     }
                   });
+
+                // Apply item replacement to all chat message elements first
+                console.log("Processing node for item replacement:", node);
+                if (highspellItems !== null) {
+                  console.log("Items loaded, applying replacement...");
+                  applyItemReplacement(node);
+                } else {
+                  console.log("Items not loaded yet, loading and then applying replacement...");
+                  // Load items and then apply replacement
+                  loadHighspellItems().then(function() {
+                    console.log("Items loaded after async call, applying replacement...");
+                    applyItemReplacement(node);
+                  });
+                }
 
                 // List of chat message classes and their types
                 var chatClasses = {
@@ -182,6 +204,95 @@ $(document).ready(function () {
 
   // ...existing code...
 });
+
+// Load highspell items JSON data
+async function loadHighspellItems() {
+  console.log("loadHighspellItems called, current state:", highspellItems);
+  if (highspellItems === null) {
+    console.log("Loading highspell items from JSON...");
+    try {
+      const url = chrome.runtime.getURL('highspell-items.json');
+      console.log("Fetching from URL:", url);
+      const response = await fetch(url);
+      console.log("Fetch response:", response);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      highspellItems = await response.json();
+      console.log('Highspell items loaded successfully, count:', Object.keys(highspellItems).length);
+    } catch (error) {
+      console.error('Failed to load highspell items:', error);
+      highspellItems = {}; // Fallback to empty object
+    }
+  }
+  return highspellItems;
+}
+
+// Replace item numbers in square brackets with item names
+function replaceItemNumbers(text) {
+  console.log("replaceItemNumbers called with text:", text);
+  if (!text || typeof text !== 'string') {
+    console.log("Text is not a string or is empty, returning:", text);
+    return text;
+  }
+  
+  // Regex to match numbers in square brackets
+  const itemPattern = /\[(\d+)\]/g;
+  console.log("Looking for pattern matches...");
+  
+  const result = text.replace(itemPattern, function(match, itemId) {
+    console.log("Found match:", match, "itemId:", itemId);
+    if (highspellItems && highspellItems[itemId]) {
+      const itemName = highspellItems[itemId];
+      console.log("Replacing", match, "with", '[' + itemName + ']');
+      return '[' + itemName + ']';
+    }
+    console.log("Item not found for ID:", itemId, "keeping original:", match);
+    return match; // Keep original if item not found
+  });
+  
+  console.log("replaceItemNumbers result:", result);
+  return result;
+}
+
+// Apply item replacement to chat message elements
+function applyItemReplacement(element) {
+  console.log("applyItemReplacement called with element:", element);
+  if (!element) {
+    console.log("Element is null/undefined, returning");
+    return;
+  }
+  
+  // Only process text nodes within the element
+  const walker = document.createTreeWalker(
+    element,
+    NodeFilter.SHOW_TEXT,
+    null,
+    false
+  );
+  
+  const textNodes = [];
+  let node;
+  while (node = walker.nextNode()) {
+    textNodes.push(node);
+  }
+  
+  console.log("Found", textNodes.length, "text nodes to process");
+  
+  textNodes.forEach(function(textNode) {
+    const originalText = textNode.nodeValue;
+    console.log("Processing text node:", originalText);
+    const replacedText = replaceItemNumbers(originalText);
+    if (replacedText !== originalText) {
+      console.log("Text changed, updating node from:", originalText, "to:", replacedText);
+      textNode.nodeValue = replacedText;
+    } else {
+      console.log("No changes made to text node");
+    }
+  });
+  
+  console.log("applyItemReplacement completed");
+}
 
 // Cache for settings
   // Removed unused chatSettings cache and defaultSettings (all settings are handled via cross-browser compatible storage API directly)

@@ -1,9 +1,16 @@
 // Developed by Zora! <3
+
+// Item replacement functionality
+let highspellItems = null;
+
 $(document).ready(function () {
   console.log(
     "Highspell Chat Extension loaded, developed by Zora with a lot of vibecoding. Have fun!"
   );
   // Extension loaded log (optional for debugging, can be removed for production)
+
+  // Load highspell items on startup
+  loadHighspellItems();
 
   // Prevent default actions for clicks on the chat menu section, for use in not have the character move when clicking a <button>
   function preventDefault(e) {
@@ -41,6 +48,17 @@ $(document).ready(function () {
                 var chatContainer = listContainer
                   ? listContainer.querySelector("div")
                   : null;
+                  
+                  // Apply item replacement to all chat message elements first
+                  if (highspellItems !== null) {
+                    applyItemReplacement(node);
+                  } else {
+                    // Load items and then apply replacement
+                    loadHighspellItems().then(function() {
+                      applyItemReplacement(node);
+                    });
+                  }
+                  
 
                 // Add timestamp if enabled
                 browser.storage.sync
@@ -83,6 +101,7 @@ $(document).ready(function () {
                       }
                     }
                   });
+
 
                 // List of chat message classes and their types
                 var chatClasses = {
@@ -180,6 +199,63 @@ $(document).ready(function () {
 
   // ...existing code...
 });
+
+// Load highspell items JSON data
+async function loadHighspellItems() {
+  if (highspellItems === null) {
+    try {
+      const response = await fetch(chrome.runtime.getURL('highspell-items.json'));
+      highspellItems = await response.json();
+      console.log('Highspell items loaded successfully');
+    } catch (error) {
+      console.error('Failed to load highspell items:', error);
+      highspellItems = {}; // Fallback to empty object
+    }
+  }
+  return highspellItems;
+}
+
+// Replace item numbers in square brackets with item names
+function replaceItemNumbers(text) {
+  if (!text || typeof text !== 'string') return text;
+  
+  // Regex to match numbers in square brackets
+  const itemPattern = /\[(\d+)\]/g;
+  
+  return text.replace(itemPattern, function(match, itemId) {
+    if (highspellItems && highspellItems[itemId]) {
+      return '[' + highspellItems[itemId] + ']';
+    }
+    return match; // Keep original if item not found
+  });
+}
+
+// Apply item replacement to chat message elements
+function applyItemReplacement(element) {
+  if (!element) return;
+  
+  // Only process text nodes within the element
+  const walker = document.createTreeWalker(
+    element,
+    NodeFilter.SHOW_TEXT,
+    null,
+    false
+  );
+  
+  const textNodes = [];
+  let node;
+  while (node = walker.nextNode()) {
+    textNodes.push(node);
+  }
+  
+  textNodes.forEach(function(textNode) {
+    const originalText = textNode.nodeValue;
+    const replacedText = replaceItemNumbers(originalText);
+    if (replacedText !== originalText) {
+      textNode.nodeValue = replacedText;
+    }
+  });
+}
 
 // Cache for settings
   // Removed unused chatSettings cache and defaultSettings (all settings are handled via browser.storage.sync directly)
