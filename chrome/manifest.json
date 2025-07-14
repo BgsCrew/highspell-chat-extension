@@ -4,7 +4,7 @@
   "icons": {
     "128": "icon-128.png"
   },
-  "version": "1.0",
+  "version": "1.3",
   "description": "Customise your chat settings, such as hidden chats or chat colours, for Highspell.",
   "permissions": ["storage"],
   "host_permissions": ["https://highspell.com/game"],
