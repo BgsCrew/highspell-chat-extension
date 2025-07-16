@@ -8,9 +8,9 @@ A powerful browser extension for the MMORPG **Highspell** that enhances the chat
 
 ## ⬇️ Extension Store Links
 
-### Chrome: https://chromewebstore.google.com/detail/highspell-chat-extension/gifkjjhmmgfbifdjkcgfopikkkblhnei?authuser=1&hl=en-GB
+### [Chrome](https://chromewebstore.google.com/detail/highspell-chat-extension/gifkjjhmmgfbifdjkcgfopikkkblhnei?authuser=1&hl=en-GB)
 
-### Firefox: Awaiting approval...
+### [Firefox](https://addons.mozilla.org/en-GB/firefox/addon/highspell-chat-extension/)
 
 ## 🚀 Installation Instructions
 
