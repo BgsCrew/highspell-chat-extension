@@ -4,7 +4,7 @@ A powerful browser extension for the MMORPG **Highspell** that enhances the chat
 
 ![Extension Features](https://img.shields.io/badge/Features-Chat_Enhancement-blue)
 ![Browser Support](https://img.shields.io/badge/Browsers-Chrome%20|%20Firefox-green)
-![Version](https://img.shields.io/badge/Version-1.0.0-orange)
+![Version](https://img.shields.io/badge/Version-1.4-orange)
 
 ## ⬇️ Extension Store Links
 
